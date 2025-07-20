@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+
+        <!-- Action Report for Qweb -->
+        <record model="ir.actions.report" id="qweb_testing3_action_report">
+            <field name="name">Print Invoice</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="model">invoice_h</field>
+            <field name="report_name">real_estate.qweb_testing3_view</field>
+        </record>
+    </data>
+
+</odoo>

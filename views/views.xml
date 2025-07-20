@@ -1,0 +1,759 @@
+<odoo>
+    <data>
+        <!-- Action Real Estate res.partner -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_real_estate">
+            <field name="name">Real Estate</field>
+            <field name="res_model">res.partner</field> <!-- Focus on this line -->
+            <field name="view_mode">list,form</field>
+        </record>
+        <!-- The view above should be deleted -->
+
+        <!-- Action Real Estate rents -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_rents">
+            <field name="name">Rents</field>
+            <field name="res_model">rents</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Action Property Types -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_types">
+            <field name="name">Property Types</field>
+            <field name="res_model">types</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Action Property Owners -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_owners">
+            <field name="name">Owners</field>
+            <field name="res_model">owners</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Action branches code -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_branches">
+            <field name="name">Branches Code</field>
+            <field name="res_model">branches</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Action Bank -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_bank">
+            <field name="name">Bank Code</field>
+            <field name="res_model">bank</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        <!--   Action Sub Account  -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_sub_acc">
+            <field name="name">Sub Acc</field>
+            <field name="res_model">sub_acc</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        <!-- Action vouchers
+        <record model="ir.actions.act_window" id="real_estate.action_window_vouchers>
+            <field name="name">New</field>
+            <field name="res_model">vouchers</field>
+            <field name="view_mode">list,form</field>
+        </record-->
+
+        <!-- Action vouchers -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_vouchers">
+            <field name="name">Voucher</field>
+            <field name="res_model">vouchers</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Action Invoice_h -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_invoice_h">
+            <field name="name">Invoice_h</field>
+            <field name="res_model">invoice_h</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Action Items -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_items">
+            <field name="name">Items</field>
+            <field name="res_model">items</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+
+        <!-- View List clients -->
+        <record model="ir.ui.view" id="real_estate.list_view"> <!-- :Todo Danger! ID is not unique -->
+            <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
+            <field name="model">clients</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="branch"/>
+                </list>
+            </field>
+        </record>
+
+
+        <!-- View List rents -->
+        <record model="ir.ui.view" id="real_estate.list_view"> <!-- :Todo Danger! ID is not unique -->
+            <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
+            <field name="model">rents</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="owner"/>
+                    <field name="contract"/>
+                    <field name="property"/>
+                    <field name="branches"/>
+                    <field name="amount"/>
+                    <field name="payment"/>
+                    <field name="start"/>
+                    <field name="end"/>
+                    <field name="state" optional="hidden"/>
+
+
+                </list>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="real_estate.form_view"> <!-- :Todo Danger!! ID is not unique -->
+            <field name="name">Rents</field>
+            <field name="model">rents</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+
+                        <!--  :ToDo The value of the parameter `invisible` should have the `rents state` field values -->
+                        <button
+                                string="Post"
+                                type="object"
+                                name="posting"
+                                invisible="state in ['repair', 'broken']"
+                                class="btn-primary"
+                        />
+
+                        <!--  The value of the parameter `invisible` modified by Billel -->
+                        <button
+                                string="Cancel"
+                                type="object"
+                                name="cancel_rent"
+                                invisible="state in ['draft', 'cancel']"
+                                class="btn-primary"
+                                groups="real_estate.group_manager"
+                        />
+                        <!--  :ToDo Add `reset_to_draft` button appears when the state is in 'cancel' -->
+                        <field
+                                name="state"
+                                widget="statusbar"
+                                groups="real_estate.group_manager"
+                        />
+
+
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!-- TODO
+                                 -->
+                            <button class="oe_stat_button text-success" icon="fa-check-square-o">
+
+                            </button>
+                            <button class="oe_stat_button" icon="oi-studio">
+
+                            </button>
+                            <button class="oe_stat_button text-danger" icon="fa-thumbs-o-down">
+
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="owner" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="contract"/>
+                            </group>
+                            <group>
+                                <field name="property"/>
+                            </group>
+                            <group>
+                                <field name="branches"/>
+                            </group>
+                            <group>
+                                <field name="amount"/>
+                            </group>
+                            <group>
+                                <field name="payment"/>
+                            </group>
+                            <group>
+                                <field name="start"/>
+                            </group>
+                            <group>
+                                <field name="end"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+
+            </field>
+        </record>
+
+        <!-- View List property types -->
+        <record model="ir.ui.view" id="real_estate.types_list_view">
+            <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
+            <field name="model">types</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id" optional="hidden"/>
+                    <field name="code"/>
+                    <field name="name"/>
+
+                </list>
+            </field>
+        </record>
+
+        <!-- View Form property types-->
+        <record model="ir.ui.view" id="real_estate.types_form_view">
+            <field name="name">Types</field> <!-- :Todo Name should not be plural -->
+            <field name="model">types</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+
+                        </div>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+
+            </field>
+        </record>
+
+
+        <!-- View List property Owners -->
+        <record model="ir.ui.view" id="real_estate.owners_list_view">
+            <field name="name">real.estate.list.view</field>
+            <field name="model">owners</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id" optional="hidden"/>
+                    <field name="name"/>
+                    <field name="nationality"/>
+                    <field name="id"/> <!-- :Todo duplicated field `id` -->
+
+                    <field name="deed_no"/>
+                    <field name="vat"/>
+                    <field name="email"/>
+                    <field name="address"/>
+
+                    <field name="state" optional="hidden"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- View Form Owners -->
+        <record model="ir.ui.view" id="real_estate.owners_form_view">
+            <field name="name">Owners</field> <!-- :Todo Name should not be plural -->
+            <field name="model">owners</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <!-- :Todo this button should be removed -->
+                        <button
+                                string="Repair"
+                                name="successful_repair"
+                                groups="real.estate.group_manager"
+                        />
+
+                        <field
+                                name="state"
+                                widget="statusbar"
+                                groups="real.estate.group_manager"
+                        />
+                    </header>
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="nationality"/>
+                            </group>
+                            <group>
+                                <field name="id"/> <!-- :Todo Danger!! never display the id or making it editable -->
+                            </group>
+                            <group>
+                                <field name="deed_no"/>
+                            </group>
+                            <group>
+                                <field name="vat"/>
+                            </group>
+                            <group>
+                                <field name="email"/>
+                            </group>
+                            <group>
+                                <field name="address"/>
+                            </group>
+
+                            <group>
+                                <field name="state"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+
+            </field>
+        </record>
+
+
+        <!-- View List branches code -->
+        <record model="ir.ui.view" id="real_estate.branches_list_view">
+            <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
+            <field name="model">branches</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id" optional="hidden"/>
+                    <field name="code"/>
+                    <field name="name"/>
+
+                </list>
+            </field>
+        </record>
+
+        <!-- View Form branches code-->
+        <record model="ir.ui.view" id="real_estate.branches_form_view">
+            <field name="name">Branches</field> <!-- :Todo Name should not be plural -->
+            <field name="model">branches</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+
+                        </div>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+
+            </field>
+        </record>
+
+        <!-- View List Vouchers -->
+        <record model="ir.ui.view" id="real_estate.vouchers_list_view">
+            <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
+            <field name="model">vouchers</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id" optional="hidden"/>
+                    <field name="doc"/>
+                    <field name="branches"/>
+                    <field name="date"/>
+                    <field name="state" optional="hidden"/>
+
+                </list>
+            </field>
+        </record>
+
+        <!-- View Form Vouchers-->
+        <record model="ir.ui.view" id="real_estate.vouchers_form_view">
+            <field name="name">Vouchers</field> <!-- :Todo Name should not be plural -->
+            <field name="model">vouchers</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <div class="oe_button_box" name="button_box">
+                            </div>
+                            <field name="doc"/>
+                            <field name="date"/>
+                            <field name="branches"/>
+
+                        </group>
+                        <notebook>
+                            <page string="Deposit Bank">
+                                <field name="voline_ids" mode="list" readonly="state in ['cansel', 'post']">
+                                    <list editable="bottom">
+                                        <field name="acc_code"/>
+                                        <field name="bank_id" widget="many2one"/>
+                                        <field name="dimension"/>
+                                        <field name="description"/>
+                                        <field name="sub_acc"/>
+                                        <field name="debit"/>
+                                        <field name="credit"/>
+
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="acc_code"/>
+                                        </group>
+                                        <group>
+                                            <field name="bank_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="dimension"/>
+                                        </group>
+                                        <group>
+                                            <field name="description"/>
+                                        </group>
+                                        <group>
+                                        <group>
+                                            <field name="sub_acc"/>
+                                        </group>
+                                            <field name="debit"/>
+                                        </group>
+                                        <group>
+                                            <field name="credit"/>
+                                        </group>
+
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+        <!-- View List bank code -->
+        <record model="ir.ui.view" id="real_estate.bank_list_view">
+            <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
+            <field name="model">bank</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id" optional="hidden"/>
+                    <field name="code"/>
+                    <field name="name"/>
+
+                </list>
+            </field>
+        </record>
+
+        <!-- View Form bank Name-->
+        <record model="ir.ui.view" id="real_estate.bank_form_view">
+            <field name="name">Bank</field> <!-- :Todo Name should not be plural -->
+            <field name="model">bank</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <div class="oe_button_box" name="button_box">
+                            </div>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- View List Sub Account -->
+        <record model="ir.ui.view" id="real_estate.sub_acc_list_view">
+            <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
+            <field name="model">sub_acc</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id" optional="hidden"/>
+                     <field name="name"/>
+                    <field name="code"/>
+                    <field name="acc"/>
+
+                </list>
+            </field>
+        </record>
+
+        <!-- View Form sub ACCOUNT Name-->
+        <record model="ir.ui.view" id="real_estate.sub_acc_form_view">
+            <field name="name">Sub Account</field> <!-- :Todo Name should not be plural -->
+            <field name="model">sub_acc</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <div class="oe_button_box" name="button_box">
+                            </div>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="acc"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- View List Invoice_h -->
+        <record model="ir.ui.view" id="real_estate.invoice_h_list_view">
+            <field name="name">real.estate.list.view</field>
+            <field name="model">invoice_h</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id" optional="hidden"/>
+                    <field name="doc_no"/>
+                    <field name="date"/>
+                    <field name="customer"/>
+                    <field name="vat"/>
+
+                    <field name="state" optional="hidden"/>
+
+                </list>
+            </field>
+        </record>
+
+        <!-- View Form Invoice_h-->
+        <record model="ir.ui.view" id="real_estate.invoice_h_form_view">
+            <field name="name">invoice_h</field>
+            <field name="model">invoice_h</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+
+                        <!--  :ToDo The value of the parameter `invisible` should have the `rents state` field values -->
+                        <button
+                                string="Post"
+                                type="object"
+                                name="posting"
+                                invisible="state in ['repair', 'broken']"
+                                class="btn-primary"
+                        />
+
+                        <!--  The value of the parameter `invisible` modified by Billel -->
+                        <button
+                                string="Cancel"
+                                type="object"
+                                name="cancel_rent"
+                                invisible="state in ['draft', 'cancel']"
+                                class="btn-primary"
+                                groups="real_estate.group_manager"
+                        />
+                        <!--  :ToDo Add `reset_to_draft` button appears when the state is in 'cancel' -->
+                        <field
+                                name="state"
+                                widget="statusbar"
+                                groups="real_estate.group_manager"
+                        />
+
+
+                    </header>
+
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!-- TODO
+                                 -->
+                            <button class="oe_stat_button text-success" icon="fa-check-square-o">
+
+                            </button>
+                            <button class="oe_stat_button" icon="oi-studio">
+
+                            </button>
+                            <button class="oe_stat_button text-danger" icon="fa-thumbs-o-down">
+
+                            </button>
+                        </div>
+                        <group>
+                            <div class="oe_button_box" name="button_box">
+
+                            </div>
+
+                            <field name="doc_no"/>
+                            <field name="date"/>
+                            <field name="customer"/>
+                            <field name="vat"/>
+
+                        </group>
+                        <notebook>
+                            <page string="Items Lines">
+                                <field name="invoice_ids" mode="list" readonly="state in ['cansel', 'post']">
+                                    <list editable="bottom">
+                                        <field name="item_code"/>
+                                        <field name="item_id" widget="many2one"/>
+                                        <field name="qty"/>
+                                        <field name="price"/>
+                                        <field name="gross"/>
+                                        <field name="disc"/>
+                                        <field name="vat"/>
+                                        <field name="total"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="item_code"/>
+                                        </group>
+                                        <group>
+                                            <field name="item_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="qty"/>
+                                        </group>
+                                        <group>
+                                            <field name="price"/>
+                                        </group>
+                                        <group>
+                                            <field name="gross"/>
+                                        </group>
+                                        <group>
+                                            <field name="disc"/>
+                                        </group>
+                                        <group>
+                                            <field name="vat"/>
+                                        </group>
+                                        <group>
+                                            <field name="total"/>
+                                        </group>
+
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- View List Items -->
+        <record model="ir.ui.view" id="real_estate.items_list_view">
+            <field name="name">real.estate.list.view</field>
+            <field name="model">items</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id" optional="hidden"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- View Form Items-->
+        <record model="ir.ui.view" id="real_estate.items_form_view">
+            <field name="name">Items</field>
+            <field name="model">items</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <div class="oe_button_box" name="button_box">
+                            </div>
+                            <field name="code"/>
+                            <field name="name"/>
+
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name="Real Estate" id="real_estate.menu_root"/>
+        <!-- Menu Home -->
+
+        <!-- Menu real_estate -->
+        <!--<menuitem
+               name="Home"
+               id="real_estate.menu_home_real_estate_clients"
+               parent="real_estate.menu_root"
+               sequence="1"
+       />
+
+        <menuitem
+               name="Clients"
+               id="real_estate.menu_home_real_estate_clients"
+               parent="real_estate.menu_root"
+               action="real_estate.action_window_real_estate"
+               sequence="2"
+       />-->
+        <menuitem
+                name="Contract Data"
+                id="real_estate.menu_home_rents"
+                parent="real_estate.menu_root"
+                action="real_estate.action_window_rents"
+                sequence="3"
+        />
+        <menuitem
+                name="Owners"
+                id="real_estate.menu_home_owners"
+                parent="real_estate.menu_configuration_Rents"
+                action="real_estate.action_window_owners"
+                sequence="5"
+        />
+        <menuitem
+                name="Property Types"
+                id="real_estate.menu_home_types"
+                parent="real_estate.menu_configuration_Rents"
+                action="real_estate.action_window_types"
+                sequence="8"
+        />
+        <menuitem
+                name="Branches"
+                id="real_estate.menu_home_branches"
+                parent="real_estate.menu_configuration_Rents"
+                action="real_estate.action_window_branches"
+                sequence="10"
+        />
+        <menuitem
+                name="Vouchers"
+                id="real_estate.menu_home_vouchers"
+                parent="real_estate.menu_root"
+                action="real_estate.action_window_vouchers"
+                sequence="10"
+        />
+        <menuitem
+                name="Cash Invoice"
+                id="real_estate.menu_home_invoice_h"
+                parent="real_estate.menu_root"
+                action="real_estate.action_window_invoice_h"
+                sequence="11"
+        />
+        <menuitem
+                name="Bank"
+                id="real_estate.menu_home_Bank"
+                parent="real_estate.menu_configuration_Voucher"
+                action="real_estate.action_window_bank"
+                sequence="30"
+        />
+        <menuitem
+                name="Item"
+                id="real_estate.menu_home_Item"
+                parent="real_estate.menu_configuration_Invoice"
+                action="real_estate.action_window_items"
+                sequence="50"
+        />
+        <menuitem
+                name="Sub Acc"
+                id="real_estate.menu_home_sub_acc"
+                parent="real_estate.menu_configuration_Invoice"
+                action="real_estate.action_window_sub_acc"
+                sequence="60"
+        />
+        <!-- Menu Configuration-->
+        <menuitem
+                name="Configuration"
+                id="real_estate.menu_config"
+                parent="real_estate.menu_root"
+                sequence="20"
+        />
+        <menuitem
+                name="Rents"
+                id="real_estate.menu_configuration_Rents"
+                parent="real_estate.menu_config"
+                sequence="25"
+        />
+        <menuitem
+                name="Voucher"
+                id="real_estate.menu_configuration_Voucher"
+                parent="real_estate.menu_config"
+                sequence="28"
+        />
+        <menuitem
+                name="Invoice"
+                id="real_estate.menu_configuration_Invoice"
+                parent="real_estate.menu_config"
+                sequence="60"
+        />
+    </data>
+</odoo>

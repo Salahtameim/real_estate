@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <template id="qweb_testing_view">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="real_estate">
+                    <t t-call ="web.external_layout">
+                        <div class="container-sm border p-4">
+                            <div class="header">
+                            <h2 class="text-center">Invoice</h2>
+                            <div class="md-4">
+                            <!--table class="table table-bordered"...>-->
+                        </div>
+
+                    </t>
+
+                </t>
+            </t>
+
+        </template>
+
+
+    </data>
+</odoo>
+
+
+<!-DOCTYPE html>
+<html>
+<head>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Bootstrap Invoice</title>
+</head>
+
+
+<body class="p-5">
+
+    <div class="container-sm border p-4"...>
+    <div class="header"...>
+    <h2 class="text-center">Invoice</h2>
+    <div class="mb-4">
+
+    <table class="table table-bordered"...>
+
+
+
+
+</div> -->
+
+
+
+</body>

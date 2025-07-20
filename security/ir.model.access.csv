@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+clients.a_man,clients.access.manager,model_clients,real_estate.group_manager,1,1,1,1
+rents.a_man,rents.access.manager,model_rents,real_estate.group_manager,1,1,1,1
+types.a_man,types.access.manager,model_types,real_estate.group_manager,1,1,1,1
+owners.a_man,owners.access.manager,model_owners,real_estate.group_manager,1,1,1,1
+branches.a_man,branches.access.manager,model_branches,real_estate.group_manager,1,1,1,1
+vouchers.a_man,vouchers.access.manager,model_vouchers,real_estate.group_manager,1,1,1,1
+voucher_line.a_man,voucher_line.access.manager,model_voucher_line,real_estate.group_manager,1,1,1,1
+bank.a_man,bank.access.manager,model_bank,real_estate.group_manager,1,1,1,1
+invoice_h.a_man,invoice_h.access.manager,model_invoice_h,real_estate.group_manager,1,1,1,1
+invoice_d.a_man,invoice_d.access.manager,model_invoice_d,real_estate.group_manager,1,1,1,1
+items.a_man,items.access.manager,model_items,real_estate.group_manager,1,1,1,1
+sub_acc.a_man,sub_acc.access.manager,model_sub_acc,real_estate.group_manager,1,1,1,1
+
+
+
+

@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+        <template id="qweb_testing_view">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="rents">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <table class="o_has_total_table table o_main_table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Owners
+                                        </th>
+                                        <th>
+                                            Contract No
+                                        </th>
+                                        <th>
+                                            Property Type
+                                        </th>
+                                        <th>
+                                            Branches Code
+                                        </th>
+                                        <th>
+                                            Rent Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <n style="font-size:18px;">
+
+                                                <t>
+                                                    <span t-field="rents.owner"/>
+                                                </t>
+
+                                            </n>
+                                        </td>
+                                        <td>
+                                            <n style="font-size:18px;">
+                                                <t>
+                                                    <span t-field="rents.contract"/>
+                                                </t>
+                                            </n>
+                                        </td>
+                                        <td>
+                                            <n style="font-size:18px;">
+                                                <span t-field="rents.property"/>
+                                            </n>
+                                        </td>
+                                        <td>
+                                            <n style="font-size:18px;">
+                                                <span t-field="rents.branches"/>
+                                            </n>
+                                        </td>
+                                        <td>
+                                            <n style="font-size:18px;">
+                                                <span t-field="rents.amount"/>
+                                            </n>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

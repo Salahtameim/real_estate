@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+
+        <!-- Action Report for Qweb -->
+        <record model="ir.actions.report" id="qweb_testing_action_report">
+            <field name="name">Qweb Sample</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="model">rents</field>
+            <field name="report_name">real_estate.qweb_testing_view</field>
+        </record>
+    </data>
+
+</odoo>

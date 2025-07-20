@@ -1,0 +1,169 @@
+<odoo>
+    <data>
+        <template id="qweb_testing3_view">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="invoice_h">
+                    <t t-call="web.external_layout">
+                        <t t-set="address"/>
+                        <div>
+                            <h2 clss="">Cash Invoice</h2>
+                        </div>
+                        <div>
+                            <td>
+                                <n style="font-size:19px;">
+                                    <h>
+                                        <div>
+                                            <strong>Date</strong>:
+                                            <span t-field="invoice_h.date"/>
+                                        </div>
+                                        <div>
+                                            <strong>Doc NO</strong>:
+                                            <span t-field="invoice_h.doc_no"/>
+                                        </div>
+
+                                        <div>
+                                            <strong>Customer Name</strong>:
+                                            <spav t-field="invoice_h.customer"/>
+                                        </div>
+                                        <div>
+                                            <strong>Vat NO</strong>:
+                                            <span t-field="invoice_h.vat"/>
+                                        </div>
+                                    </h>
+                                </n>
+                            </td>
+                        </div>
+                        <div class="page">
+                            <t t-set="layout_document_title"/>
+
+                            <!--div class="row md-4" id="informations"-->
+                            <!--table class="o_has_total_table table o_main_table table-borderless"></table-->
+
+                            <table class="o_has_total_table table o_main_table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Item Code
+                                        </th>
+                                        <th>
+                                            items
+                                        </th>
+                                        <th>
+                                            Qty
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            G.Total
+                                        </th>
+                                        <th>
+                                            Disc
+                                        </th>
+                                        <th>
+                                            Vat 15%
+                                        </th>
+                                        <th>
+                                            Total
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    >>
+
+                                    <t t-set="amount" t-value="0"/>
+                                    <t t-set="total_tax" t-value="0"/>
+                                    <t t-set="net" t-value="0"/>
+                                    <t t-set="total_disc" t-value="0"/>
+                                    <t t-foreach="invoice_h.invoice_ids" t-as="invoice_d">
+
+
+
+                                        <!-- Computing line value -->
+                                        <t t-set="gross" t-value="invoice_d.qty * invoice_d.price"/>
+                                        <t t-set="tax_amount" t-value="(invoice_d.qty * invoice_d.price - invoice_d.disc) * 0.15"/>
+                                        <t t-set="total" t-value="invoice_d.qty * invoice_d.price -invoice_d.disc + tax_amount"/>
+
+                                        <!-- Computing global value -->
+                                        <t t-set="amount" t-value="amount + (invoice_d.qty * invoice_d.price)"/>
+                                         <t t-set="total_disc" t-value="total_disc + invoice_d.disc"/>
+                                        <t t-set="total_tax" t-value="total_tax + tax_amount"/>
+                                        <t t-set="net" t-value="amount - total_disc + total_tax"/>
+
+                                        <tr>
+                                            <td>
+                                                <span t-field="invoice_d.item_code"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="invoice_d.item_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="invoice_d.qty"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="invoice_d.price"/>
+                                            </td>
+                                            <td>
+                                                <span t-out="gross"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="invoice_d.disc"/>
+                                            </td>
+                                            <td>
+                                                <span t-out="tax_amount"/>
+                                            </td>
+                                            <td>
+                                                <span t-out="total"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div class="clearfix" name="so_total_summary">
+                                <div id="total" class="row mt-n3" name="total">
+                                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
+                                        <table class="o_has_total_table table  table-borderless">
+                                            <tr class="o_subtotal">
+                                                <td>
+                                                    <span>Total Amount</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-att-class="oe_subtotal_footer_separator" t-out="amount"/>
+                                                </td>
+                                            </tr>
+                                             <tr class="o_disc">
+                                                <td>
+                                                    <span>Discount</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-out="total_disc"/>
+                                                </td>
+                                            </tr>
+                                            <tr class="o_taxes">
+                                                <td>
+                                                    <span>Tax 15%</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-out="total_tax"/>
+                                                </td>
+                                            </tr>
+                                            <tr class="o_total">
+                                                <td>
+                                                    <strong>Net Amount</strong>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-out="net"/>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
