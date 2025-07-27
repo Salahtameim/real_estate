@@ -487,7 +487,6 @@
             </field>
         </record>
 
-
         <!-- View List Invoice_h -->
         <record model="ir.ui.view" id="real_estate.invoice_h_list_view">
             <field name="name">real.estate.list.view</field>
@@ -667,6 +666,19 @@
                action="real_estate.action_window_real_estate"
                sequence="2"
        />-->
+        <!-- Menu Configuration-->
+        <menuitem
+                name="Configuration"
+                id="real_estate.menu_config"
+                parent="real_estate.menu_root"
+                sequence="20"
+        />
+        <menuitem
+                name="Rents"
+                id="real_estate.menu_configuration_Rents"
+                parent="real_estate.menu_config"
+                sequence="25"
+        />
         <menuitem
                 name="Contract Data"
                 id="real_estate.menu_home_rents"
@@ -710,11 +722,23 @@
                 sequence="11"
         />
         <menuitem
+                name="Voucher"
+                id="real_estate.menu_configuration_Voucher"
+                parent="real_estate.menu_config"
+                sequence="28"
+        />
+        <menuitem
                 name="Bank"
                 id="real_estate.menu_home_Bank"
                 parent="real_estate.menu_configuration_Voucher"
                 action="real_estate.action_window_bank"
                 sequence="30"
+        />
+        <menuitem
+                name="Invoice"
+                id="real_estate.menu_configuration_Invoice"
+                parent="real_estate.menu_config"
+                sequence="60"
         />
         <menuitem
                 name="Item"
@@ -728,31 +752,6 @@
                 id="real_estate.menu_home_sub_acc"
                 parent="real_estate.menu_configuration_Invoice"
                 action="real_estate.action_window_sub_acc"
-                sequence="60"
-        />
-        <!-- Menu Configuration-->
-        <menuitem
-                name="Configuration"
-                id="real_estate.menu_config"
-                parent="real_estate.menu_root"
-                sequence="20"
-        />
-        <menuitem
-                name="Rents"
-                id="real_estate.menu_configuration_Rents"
-                parent="real_estate.menu_config"
-                sequence="25"
-        />
-        <menuitem
-                name="Voucher"
-                id="real_estate.menu_configuration_Voucher"
-                parent="real_estate.menu_config"
-                sequence="28"
-        />
-        <menuitem
-                name="Invoice"
-                id="real_estate.menu_configuration_Invoice"
-                parent="real_estate.menu_config"
                 sequence="60"
         />
     </data>

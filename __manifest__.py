@@ -24,10 +24,6 @@
         'report/qweb_testing3.xml',
         'views/report.xml',
         'views/report3.xml'
-
-
-
-
     ],
 
     "application": True
