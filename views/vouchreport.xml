@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+
+        <!-- Action vouchreport for Qweb -->
+        <record model="ir.actions.report" id="qweb_voucher_rp_action_report">
+            <field name="name">Print Voucher</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="model">vouchers</field>
+            <field name="report_name">real_estate.qweb_voucher_rp_view</field>
+        </record>
+    </data>
+
+</odoo>

@@ -22,8 +22,10 @@
         'views/views.xml',
         'report/qweb_testing.xml',
         'report/qweb_testing3.xml',
+        'report/qweb_voucher_rp.xml',
         'views/report.xml',
-        'views/report3.xml'
+        'views/report3.xml',
+        'views/vouchreport.xml'
 
 
 

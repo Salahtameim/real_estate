@@ -1,0 +1,143 @@
+<odoo>
+    <data>
+        <template id="qweb_voucher_rp_view">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="vouchers">
+                    <t t-call="web.external_layout">
+                        <t t-set="address"/>
+                        <div>
+                            <h2 clss="">Voucher Line</h2>
+                        </div>
+                        <div>
+                            <td>
+                                <n style="font-size:19px;">
+                                    <h>
+                                        <div>
+                                            <strong>Date </strong> :
+                                            <span t-field="vouchers.date"/>
+                                        </div>
+                                        <div>
+                                            <strong>Doc NO </strong> :
+                                            <spav t-field="vouchers.doc"/>
+                                        </div>
+                                        <div>
+                                            <strong>B Code </strong> :
+                                            <span t-field="vouchers.branches"/>
+                                        </div>
+                                        <div>
+                                            <strong>State </strong> :
+                                            <span t-field="vouchers.state"/>
+                                        </div>
+                                    </h>
+                                </n>
+                            </td>
+                        </div>
+                        <div class="page">
+                            <t t-set="layout_document_title"/>
+
+                            <!--div class="row md-4" id="informations"-->
+                            <!--table class="o_has_total_table table o_main_table table-borderless"></table-->
+
+                            <table class="o_has_total_table table o_main_table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Acc Code
+                                        </th>
+                                        <th>
+                                            Acc Name
+                                        </th>
+                                        <th>
+                                            Dimension
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th>
+                                            Sub Acc
+                                        </th>
+                                        <th>
+                                            Debit
+                                        </th>
+                                        <th>
+                                            Credit
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    >>
+
+                                    <t t-set="total_debit" t-value="0"/>
+                                    <t t-set="total_credit" t-value="0"/>
+                                    <t t-foreach="vouchers.voline_ids" t-as="voucher_line">
+
+
+                                        <!-- Computing line value
+                                        <t t-set="gross" t-value="invoice_d.qty * invoice_d.price"/>
+                                        <t t-set="tax_amount" t-value="(invoice_d.qty * invoice_d.price - invoice_d.disc) * 0.15"/>
+                                        <t t-set="total" t-value="invoice_d.qty * invoice_d.price -invoice_d.disc + tax_amount"/>-->
+
+                                        <!-- Computing global value -->
+                                        <t t-set="total_debit" t-value="total_debit + (voucher_line.debit)"/>
+                                        <t t-set="total_credit" t-value="total_credit + (voucher_line.credit)"/>
+
+
+                                        <tr>
+                                            <td>
+                                                <span t-field="voucher_line.acc_code"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="voucher_line.bank_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="voucher_line.dimension"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="voucher_line.description"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="voucher_line.sub_acc"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="voucher_line.debit"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="voucher_line.credit"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div class="clearfix" name="so_total_summary">
+                                <div id="total" class="row mt-n3" name="total">
+                                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
+                                        <table class="o_has_total_table table  table-borderless">
+                                            <tr class="o_subtotal">
+                                                <td>
+                                                    <span>Total Debit</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-att-class="oe_subtotal_footer_separator" t-out="total_debit "/>
+                                                </td>
+                                            </tr>
+                                            <tr class="o_subtotal">
+                                                <td>
+                                                    <span>Total Credit</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-out="total_credit"/>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
