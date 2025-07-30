@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 
-class vouchers(models.Model):
+class Vouchers(models.Model):
 
     _name = "vouchers"
     _description = "Vouchers Entry"
@@ -12,6 +12,7 @@ class vouchers(models.Model):
         copy=True,
         required=True
     )
+
     branches = fields.Many2one(
         comodel_name="branches",
         ondelete="restrict",
@@ -25,12 +26,14 @@ class vouchers(models.Model):
         copy=True,
         required=True
     )
+
     voline_ids = fields.One2many(
         comodel_name="voucher_line",
         inverse_name="voucher_id",
         string="Line",
         copy=True
     )
+
     state = fields.Selection(
         selection=[
             ("draft", "Draft"),
@@ -53,10 +56,3 @@ class vouchers(models.Model):
         This method complete the travel
         """
         self.state = "post"
-
-
-
-
-
-
-
