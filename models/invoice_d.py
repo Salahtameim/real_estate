@@ -1,5 +1,6 @@
 from odoo import models, fields
-class Inv_d(models.Model):
+
+class InvoiceD(models.Model):
 
     _name = "invoice_d"
     _description = "Cash Sale Item"

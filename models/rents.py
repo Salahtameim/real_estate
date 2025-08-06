@@ -1,6 +1,5 @@
-from email.policy import default
-
 from odoo import models, fields
+
 class Rents(models.Model):
     _name = "rents"
     _description = "Rent contract"
@@ -14,6 +13,7 @@ class Rents(models.Model):
         copy=True,
         required=True
     )
+
     property = fields.Many2one(
         comodel_name="types",
         ondelete="restrict",
@@ -21,11 +21,13 @@ class Rents(models.Model):
         copy=True,
         required=True
     )
+
     contract = fields.Char(
         string="Contract No",
         copy=True,
         required=True
     )
+
     branches = fields.Many2one(
         comodel_name="branches",
         ondelete="restrict",
@@ -33,11 +35,13 @@ class Rents(models.Model):
         copy=True,
         required=True
     )
+
     amount = fields.Float(
         string="Rent Amount",
         copy=True,
         required=True
     )
+
     # Everything should be with the same language
     payment =  fields.Selection(
             selection=[
@@ -49,6 +53,7 @@ class Rents(models.Model):
                  copy=True,
                  default="draft"
     )
+
     start = fields.Date(
         string="From Date ",
         copy=True,
@@ -62,6 +67,7 @@ class Rents(models.Model):
         copy=True,
         required=True
     )
+
     state = fields.Selection(
         selection=[
             ("draft", "Draft"),
@@ -74,7 +80,6 @@ class Rents(models.Model):
         copy=True,
         default="draft"
     )
-
 
     def posting(self):
         """

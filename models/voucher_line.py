@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 
-class voucher_line(models.Model):
+class VoucherLine(models.Model):
 
     _name = "voucher_line"
     _description = "Voucher Data"
@@ -14,14 +14,14 @@ class voucher_line(models.Model):
         copy=True,
         required=True
     )
+
     acc_code = fields.Char(
         string=" Acc code",
         copy=True,
         required=True,
         related="bank_id.code"
-
-
     )
+
     dimension = fields.Many2one(
         comodel_name="branches",
         ondelete="restrict",
@@ -36,20 +36,20 @@ class voucher_line(models.Model):
         string="Description",
         copy=True,
         required=True
-
-
     )
+
     sub_acc = fields.Char(
         string="Sub Acc",
         copy=True,
         required=True,
-
     )
+
     debit = fields.Float(
         string="Debit",
         copy=True,
         required=True
     )
+
     credit = fields.Float(
         string="Credit",
         copy=True,
@@ -63,5 +63,3 @@ class voucher_line(models.Model):
         copy=True,
         required=True
     )
-
-

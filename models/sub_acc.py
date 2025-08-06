@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 
-class sub_acc(models.Model):
+class SubAcc(models.Model):
 
     _name = "sub_acc"
     _description = "Sub account"
@@ -26,4 +26,3 @@ class sub_acc(models.Model):
         copy=True,
         required=True
     )
-

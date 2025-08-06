@@ -13,19 +13,23 @@
                                 <n style="font-size:19px;">
                                     <h>
                                         <div>
-                                            <strong>Date </strong> :
+                                            <strong>Date</strong>
+                                            :
                                             <span t-field="vouchers.date"/>
                                         </div>
                                         <div>
-                                            <strong>Doc NO </strong> :
+                                            <strong>Doc NO</strong>
+                                            :
                                             <spav t-field="vouchers.doc"/>
                                         </div>
                                         <div>
-                                            <strong>B Code </strong> :
+                                            <strong>B Code</strong>
+                                            :
                                             <span t-field="vouchers.branches"/>
                                         </div>
                                         <div>
-                                            <strong>State </strong> :
+                                            <strong>State</strong>
+                                            :
                                             <span t-field="vouchers.state"/>
                                         </div>
                                     </h>
@@ -62,16 +66,12 @@
                                         <th>
                                             Credit
                                         </th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    >>
-
                                     <t t-set="total_debit" t-value="0"/>
                                     <t t-set="total_credit" t-value="0"/>
                                     <t t-foreach="vouchers.voline_ids" t-as="voucher_line">
-
 
                                         <!-- Computing line value
                                         <t t-set="gross" t-value="invoice_d.qty * invoice_d.price"/>
@@ -81,8 +81,6 @@
                                         <!-- Computing global value -->
                                         <t t-set="total_debit" t-value="total_debit + (voucher_line.debit)"/>
                                         <t t-set="total_credit" t-value="total_credit + (voucher_line.credit)"/>
-
-
                                         <tr>
                                             <td>
                                                 <span t-field="voucher_line.acc_code"/>
@@ -107,33 +105,22 @@
                                             </td>
                                         </tr>
                                     </t>
+                                    <tbody id="total">
+                                        <tr class="o_total">
+                                            <td colspan="4"/>
+                                            <td>
+                                                <strong>Total</strong>
+                                            </td>
+                                            <td>
+                                                <strong t-att-class="oe_subtotal_footer_separator" t-out="total_debit "/>
+                                            </td>
+                                            <td>
+                                                <strong t-out="total_credit"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </tbody>
                             </table>
-                            <div class="clearfix" name="so_total_summary">
-                                <div id="total" class="row mt-n3" name="total">
-                                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
-                                        <table class="o_has_total_table table  table-borderless">
-                                            <tr class="o_subtotal">
-                                                <td>
-                                                    <span>Total Debit</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <span t-att-class="oe_subtotal_footer_separator" t-out="total_debit "/>
-                                                </td>
-                                            </tr>
-                                            <tr class="o_subtotal">
-                                                <td>
-                                                    <span>Total Credit</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <span t-out="total_credit"/>
-                                                </td>
-                                            </tr>
-
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </t>
                 </t>

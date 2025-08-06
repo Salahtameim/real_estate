@@ -3,7 +3,7 @@
 
         <record model="res.groups" id="real_estate.group_manager">
             <field name="name">Real estate / Manager</field>
-           <!--<field name="users" eval="[(4, ref('base.user_admin'))]"/> -->
+           <field name="users" eval="[(4, ref('base.user_admin'))]"/>
         </record>
 
          <!--<record model="res.groups" id="real.group_user">-->

@@ -18,4 +18,3 @@ class Branches(models.Model):
         copy=True,
         required=True
     )
-
