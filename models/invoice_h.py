@@ -1,6 +1,6 @@
-
 from odoo import models, fields
-class Inv_h(models.Model):
+
+class InvoiceH(models.Model):
 
     _name = "invoice_h"
     _description = "Cash Sale"
@@ -12,11 +12,13 @@ class Inv_h(models.Model):
         copy=True,
         required=True
     )
+
     date = fields.Date(
         string="Date",
         copy=True,
         required=True
     )
+
     customer = fields.Many2one(
         comodel_name="owners",
         ondelete="restrict",
@@ -32,8 +34,6 @@ class Inv_h(models.Model):
         related="customer.vat"
 
     )
-
-
 
     invoice_ids = fields.One2many(
         comodel_name="invoice_d",

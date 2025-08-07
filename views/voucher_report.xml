@@ -1,7 +1,7 @@
 <odoo>
     <data>
 
-        <!-- Action vouchreport for Qweb -->
+        <!-- Action voucher report for Qweb -->
         <record model="ir.actions.report" id="qweb_voucher_rp_action_report">
             <field name="name">Print Voucher</field>
             <field name="report_type">qweb-pdf</field>

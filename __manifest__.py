@@ -25,16 +25,8 @@
         'report/qweb_voucher_rp.xml',
         'views/report.xml',
         'views/report3.xml',
-        'views/vouchreport.xml'
-
-
-
-
+        'views/voucher_report.xml'
     ],
 
     "application": True
 }
-
-
-
-

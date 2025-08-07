@@ -1,6 +1,7 @@
 
 from odoo import models, fields
-class Inv_h(models.Model):
+
+class Items(models.Model):
 
     _name = "items"
     _description = "Item Name"
