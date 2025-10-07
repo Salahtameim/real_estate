@@ -1,6 +1,4 @@
-from odoo import models, fields
-
-
+from odoo import models, fields,api
 class VoucherLine(models.Model):
 
     _name = "voucher_line"
@@ -14,48 +12,39 @@ class VoucherLine(models.Model):
         copy=True,
         required=True
     )
-
     acc_code = fields.Char(
-        string=" Acc code",
+        string="Acc code",
         copy=True,
         required=True,
         related="bank_id.code"
     )
-
     dimension = fields.Many2one(
         comodel_name="branches",
         ondelete="restrict",
         string="Dimension",
         copy=True,
         required=True
-
-
     )
-
     description = fields.Char(
         string="Description",
         copy=True,
         required=True
     )
-
     sub_acc = fields.Char(
         string="Sub Acc",
         copy=True,
         required=True,
     )
-
     debit = fields.Float(
         string="Debit",
         copy=True,
         required=True
     )
-
     credit = fields.Float(
         string="Credit",
         copy=True,
         required=True
     )
-
     voucher_id = fields.Many2one(
         comodel_name="vouchers",
         ondelete="restrict",
@@ -63,3 +52,10 @@ class VoucherLine(models.Model):
         copy=True,
         required=True
     )
+
+    @api.onchange('debit')
+    def _onchange_debit(self):
+        for line in self:
+            if line.debit > 0.0:
+                line.credit = 0.0
+

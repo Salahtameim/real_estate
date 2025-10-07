@@ -61,6 +61,12 @@
             <field name="res_model">vouchers</field>
             <field name="view_mode">list,form</field>
         </record>
+        <!-- Action voucher_line -->
+        <record model="ir.actions.act_window" id="real_estate.action_window_voucher_line">
+            <field name="name">Voucher_Line</field>
+            <field name="res_model">voucher_line</field>
+            <field name="view_mode">list,form</field>
+        </record>
 
         <!-- Action Invoice_h -->
         <record model="ir.actions.act_window" id="real_estate.action_window_invoice_h">
@@ -76,7 +82,6 @@
             <field name="view_mode">list,form</field>
         </record>
 
-
         <!-- View List clients -->
         <record model="ir.ui.view" id="real_estate.list_view"> <!-- :Todo Danger! ID is not unique -->
             <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
@@ -88,7 +93,6 @@
                 </list>
             </field>
         </record>
-
 
         <!-- View List rents -->
         <record model="ir.ui.view" id="real_estate.list_view"> <!-- :Todo Danger! ID is not unique -->
@@ -105,13 +109,9 @@
                     <field name="start"/>
                     <field name="end"/>
                     <field name="state" optional="hidden"/>
-
-
                 </list>
             </field>
         </record>
-
-
         <record model="ir.ui.view" id="real_estate.form_view"> <!-- :Todo Danger!! ID is not unique -->
             <field name="name">Rents</field>
             <field name="model">rents</field>
@@ -143,8 +143,6 @@
                                 widget="statusbar"
                                 groups="real_estate.group_manager"
                         />
-
-
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
@@ -189,7 +187,6 @@
                     </sheet>
                     <chatter/>
                 </form>
-
             </field>
         </record>
 
@@ -215,7 +212,6 @@
                 <form>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-
                         </div>
                         <group>
                             <field name="code"/>
@@ -226,6 +222,7 @@
                 </form>
 
             </field>
+
         </record>
 
 
@@ -330,7 +327,6 @@
 
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-
                         </div>
                         <group>
                             <field name="code"/>
@@ -342,6 +338,22 @@
 
             </field>
         </record>
+        <!-- View List Voucher-line -->
+        <record model="ir.ui.view" id="real_estate.voucher-line_list_view">
+            <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
+            <field name="model">voucher_line</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="acc_code"/>
+                    <field name="bank_id" widget="many2one"/>
+                    <field name="dimension"/>
+                    <field name="description"/>
+                    <field name="sub_acc"/>
+                    <field name="debit"/>
+                    <field name="credit"/>
+                </list>
+            </field>
+        </record>
 
         <!-- View List Vouchers -->
         <record model="ir.ui.view" id="real_estate.vouchers_list_view">
@@ -350,11 +362,10 @@
             <field name="arch" type="xml">
                 <list>
                     <field name="id" optional="hidden"/>
-                    <field name="doc"/>
+                    <field name="doc_no"/>
                     <field name="branches"/>
                     <field name="date"/>
                     <field name="state" optional="hidden"/>
-
                 </list>
             </field>
         </record>
@@ -369,10 +380,9 @@
                         <group>
                             <div class="oe_button_box" name="button_box">
                             </div>
-                            <field name="doc"/>
+                            <field name="doc_no" readonly="1"/>
                             <field name="date"/>
                             <field name="branches"/>
-
                         </group>
                         <notebook>
                             <page string="Deposit Bank">
@@ -401,19 +411,23 @@
                                             <field name="description"/>
                                         </group>
                                         <group>
-                                        <group>
                                             <field name="sub_acc"/>
                                         </group>
+                                        <group>
                                             <field name="debit"/>
                                         </group>
                                         <group>
                                             <field name="credit"/>
                                         </group>
-
                                     </form>
                                 </field>
                             </page>
                         </notebook>
+                        <group>
+                            <field name="total_debit" readonly="1"/>
+                            <field name="total_credit" readonly="1"/>
+                            <field name="total_difference" readonly="1"/>
+                        </group>
                     </sheet>
                     <chatter/>
                 </form>
@@ -430,6 +444,30 @@
                     <field name="name"/>
 
                 </list>
+            </field>
+        </record>
+
+        <!-- View Form voucher_line-->
+        <record model="ir.ui.view" id="real_estate.bank_form_view">
+            <field name="name">Voucher Line</field> <!-- :Todo Name should not be plural -->
+            <field name="model">voucher_line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <div class="oe_button_box" name="button_box">
+                            </div>
+                            <field name="acc_code"/>
+                            <field name="bank_id" widget="many2one"/>
+                            <field name="dimension"/>
+                            <field name="description"/>
+                            <field name="sub_acc"/>
+                            <field name="debit"/>
+                            <field name="credit"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
             </field>
         </record>
 
@@ -459,7 +497,7 @@
             <field name="arch" type="xml">
                 <list>
                     <field name="id" optional="hidden"/>
-                     <field name="name"/>
+                    <field name="name"/>
                     <field name="code"/>
                     <field name="acc"/>
 
@@ -498,6 +536,11 @@
                     <field name="date"/>
                     <field name="customer"/>
                     <field name="vat"/>
+                    <field name="gross_total"/>
+                    <field name="disc_total"/>
+                    <field name="vat_total"/>
+                    <field name="net_total"/>
+                    <field name="amount_to_words"/>
 
                     <field name="state" optional="hidden"/>
 
@@ -514,33 +557,30 @@
                     <header>
 
                         <!--  :ToDo The value of the parameter `invisible` should have the `rents state` field values -->
-                        <button
+                        <!--button
                                 string="Post"
                                 type="object"
                                 name="posting"
                                 invisible="state in ['repair', 'broken']"
                                 class="btn-primary"
-                        />
+                        /-->
 
                         <!--  The value of the parameter `invisible` modified by Billel -->
-                        <button
+                        <!--<button
                                 string="Cancel"
                                 type="object"
-                                name="cancel_rent"
+                                name="cancel"
                                 invisible="state in ['draft', 'cancel']"
                                 class="btn-primary"
                                 groups="real_estate.group_manager"
-                        />
+                        />-->
                         <!--  :ToDo Add `reset_to_draft` button appears when the state is in 'cancel' -->
                         <field
                                 name="state"
                                 widget="statusbar"
                                 groups="real_estate.group_manager"
                         />
-
-
                     </header>
-
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <!-- TODO
@@ -604,11 +644,19 @@
                                         <group>
                                             <field name="total"/>
                                         </group>
-
                                     </form>
                                 </field>
                             </page>
                         </notebook>
+                        <group>
+                            <group>
+                                <field name="gross_total"/>
+                                <field name="disc_total"/>
+                                <field name="vat_total"/>
+                                <field name="net_total"/>
+                                <field name="amount_to_words"/>
+                            </group>
+                        </group>
                     </sheet>
                     <chatter/>
                 </form>
@@ -746,6 +794,13 @@
                 parent="real_estate.menu_configuration_Invoice"
                 action="real_estate.action_window_items"
                 sequence="50"
+        />
+        <menuitem
+                name="Voucher-line"
+                id="real_estate.menu_home_voucher-line"
+                parent="real_estate.menu_root"
+                action="real_estate.action_window_voucher_line"
+                sequence="80"
         />
         <menuitem
                 name="Sub Acc"

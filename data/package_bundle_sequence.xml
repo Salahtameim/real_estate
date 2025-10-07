@@ -1,0 +1,15 @@
+<odoo>
+    <data noubdate="1">
+
+        <record id="invoice_h_sequence" model="ir.sequence">
+            <field name="name">Invoice_h Sequence</field>
+            <field name="code">sequence.sequence</field>
+            <field name="prefix">PB/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="implementation"> eval</field>
+        </record>
+   </data>
+</odoo>
+

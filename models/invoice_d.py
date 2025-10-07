@@ -1,7 +1,5 @@
-from odoo import models, fields
-
+from odoo import models, fields,api
 class InvoiceD(models.Model):
-
     _name = "invoice_d"
     _description = "Cash Sale Item"
     _inherit = ["mail.thread", "mail.activity.mixin"]
@@ -19,7 +17,7 @@ class InvoiceD(models.Model):
         copy=True,
         required=True
 
-   )
+    )
     qty = fields.Float(
         string="Qty",
         copy=True,
@@ -32,8 +30,8 @@ class InvoiceD(models.Model):
     )
     gross = fields.Float(
         string="G.Total",
-        copy=True,
-        required=True
+        compute='_compute_gross',
+        store=True
     )
     disc = fields.Float(
         string="Disc",
@@ -42,14 +40,15 @@ class InvoiceD(models.Model):
     )
     vat = fields.Float(
         string="Vat 15%",
-        copy=True,
-        required=True
+        compute='_compute_vat',
+        store=True
     )
     total = fields.Float(
         string="Total amount",
-        copy=True,
-        required=True
+        compute = '_compute_total',
+        store = True
     )
+
     invoice_id = fields.Many2one(
         comodel_name="invoice_h",
         ondelete="restrict",
@@ -57,3 +56,20 @@ class InvoiceD(models.Model):
         copy=True,
         required=True
     )
+    @api.depends('qty', 'price')
+    def _compute_gross(self):
+        for record in self:
+            record.gross = record.qty * record.price
+
+    @api.depends('qty', 'price', 'disc', 'vat')
+    def _compute_vat(self):
+        for record in self:
+            record.vat = (record.qty * record.price - record.disc) * 0.15
+
+
+    @api.depends('qty', 'price', 'disc')
+    def _compute_total(self):
+        for record in self:
+            record.total = record.gross - record.disc + record.vat
+
+

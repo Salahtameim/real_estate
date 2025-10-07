@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 {
-
     'name': "Real Estate",
 
     'summary': "Real Estate management",
@@ -18,6 +17,8 @@
 
     'data': [
         'security/res_groups.xml',
+        'data/ir_sequence.xml',
+        'data/ir_sequence_voucher.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'report/qweb_testing.xml',
