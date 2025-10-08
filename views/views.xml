@@ -716,44 +716,11 @@
        />-->
         <!-- Menu Configuration-->
         <menuitem
-                name="Configuration"
-                id="real_estate.menu_config"
-                parent="real_estate.menu_root"
-                sequence="20"
-        />
-        <menuitem
-                name="Rents"
-                id="real_estate.menu_configuration_Rents"
-                parent="real_estate.menu_config"
-                sequence="25"
-        />
-        <menuitem
                 name="Contract Data"
                 id="real_estate.menu_home_rents"
                 parent="real_estate.menu_root"
                 action="real_estate.action_window_rents"
                 sequence="3"
-        />
-        <menuitem
-                name="Owners"
-                id="real_estate.menu_home_owners"
-                parent="real_estate.menu_configuration_Rents"
-                action="real_estate.action_window_owners"
-                sequence="5"
-        />
-        <menuitem
-                name="Property Types"
-                id="real_estate.menu_home_types"
-                parent="real_estate.menu_configuration_Rents"
-                action="real_estate.action_window_types"
-                sequence="8"
-        />
-        <menuitem
-                name="Branches"
-                id="real_estate.menu_home_branches"
-                parent="real_estate.menu_configuration_Rents"
-                action="real_estate.action_window_branches"
-                sequence="10"
         />
         <menuitem
                 name="Vouchers"
@@ -770,44 +737,77 @@
                 sequence="11"
         />
         <menuitem
+                name="Voucher-line"
+                id="real_estate.menu_home_voucher-line"
+                parent="real_estate.menu_root"
+                action="real_estate.action_window_voucher_line"
+                sequence="12"
+        />
+        <menuitem
+                name="Configuration"
+                id="real_estate.menu_config"
+                parent="real_estate.menu_root"
+                sequence="20"
+        />
+        <menuitem
+                name="Rents"
+                id="real_estate.menu_configuration_Rents"
+                parent="real_estate.menu_config"
+                sequence="25"
+        />
+        <menuitem
+                name="Owners"
+                id="real_estate.menu_home_owners"
+                parent="real_estate.menu_configuration_Rents"
+                action="real_estate.action_window_owners"
+                sequence="26"
+        />
+        <menuitem
+                name="Property Types"
+                id="real_estate.menu_home_types"
+                parent="real_estate.menu_configuration_Rents"
+                action="real_estate.action_window_types"
+                sequence="27"
+        />
+        <menuitem
+                name="Branches"
+                id="real_estate.menu_home_branches"
+                parent="real_estate.menu_configuration_Rents"
+                action="real_estate.action_window_branches"
+                sequence="28"
+        />
+        <menuitem
                 name="Voucher"
                 id="real_estate.menu_configuration_Voucher"
                 parent="real_estate.menu_config"
-                sequence="28"
+                sequence="35"
         />
         <menuitem
                 name="Bank"
                 id="real_estate.menu_home_Bank"
                 parent="real_estate.menu_configuration_Voucher"
                 action="real_estate.action_window_bank"
-                sequence="30"
+                sequence="36"
         />
         <menuitem
                 name="Invoice"
                 id="real_estate.menu_configuration_Invoice"
                 parent="real_estate.menu_config"
-                sequence="60"
+                sequence="45"
         />
         <menuitem
                 name="Item"
                 id="real_estate.menu_home_Item"
                 parent="real_estate.menu_configuration_Invoice"
                 action="real_estate.action_window_items"
-                sequence="50"
-        />
-        <menuitem
-                name="Voucher-line"
-                id="real_estate.menu_home_voucher-line"
-                parent="real_estate.menu_root"
-                action="real_estate.action_window_voucher_line"
-                sequence="80"
+                sequence="46"
         />
         <menuitem
                 name="Sub Acc"
                 id="real_estate.menu_home_sub_acc"
                 parent="real_estate.menu_configuration_Invoice"
                 action="real_estate.action_window_sub_acc"
-                sequence="60"
+                sequence="47"
         />
     </data>
 </odoo>
