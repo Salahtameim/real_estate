@@ -19,7 +19,7 @@ class Vouchers(models.Model):
         copy=True,
         required=True
     )
-    doc_no = fields.Char(
+    name = fields.Char(
         default='New',
         required=1
     )
@@ -59,8 +59,8 @@ class Vouchers(models.Model):
     @api.model
     def create(self, vals):
         res = super(Vouchers, self).create(vals)
-        if res.doc_no == 'New':
-            res.doc_no = self.env['ir.sequence'].next_by_code('vouchers')
+        if res.name == 'New':
+            res.name = self.env['ir.sequence'].next_by_code('vouchers')
         return res
 
     @api.onchange('voline_ids')

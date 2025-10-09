@@ -18,7 +18,7 @@
                                         </div>
                                         <div>
                                             <strong>Doc NO</strong>:
-                                            <span t-field="invoice_h.doc_no"/>
+                                            <span t-field="invoice_h.name"/>
                                         </div>
 
                                         <div>

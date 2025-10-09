@@ -9,7 +9,7 @@ class InvoiceH(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
 
-    doc_no = fields.Char(
+    name = fields.Char(
         default='New',
         required=1
     )
@@ -86,8 +86,8 @@ class InvoiceH(models.Model):
     @api.model
     def create(self, vals):
         res = super(InvoiceH, self).create(vals)
-        if res.doc_no =='New':
-           res.doc_no = self.env['ir.sequence'].next_by_code('invoice_h')
+        if res.name =='New':
+           res.name = self.env['ir.sequence'].next_by_code('invoice_h')
         return res
 
 

@@ -18,7 +18,7 @@
                                 <div>
                                     <strong>Doc NO</strong>
                                     :
-                                    <spav t-field="vouchers.doc_no"/>
+                                    <spav t-field="vouchers.name"/>
                                 </div>
                                 <div>
                                     <strong>B Code</strong>

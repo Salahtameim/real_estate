@@ -362,7 +362,7 @@
             <field name="arch" type="xml">
                 <list>
                     <field name="id" optional="hidden"/>
-                    <field name="doc_no"/>
+                    <field name="name"/>
                     <field name="branches"/>
                     <field name="date"/>
                     <field name="state" optional="hidden"/>
@@ -380,7 +380,7 @@
                         <group>
                             <div class="oe_button_box" name="button_box">
                             </div>
-                            <field name="doc_no" readonly="1"/>
+                            <field name="name" readonly="1"/>
                             <field name="date"/>
                             <field name="branches"/>
                         </group>
@@ -532,7 +532,7 @@
             <field name="arch" type="xml">
                 <list>
                     <field name="id" optional="hidden"/>
-                    <field name="doc_no"/>
+                    <field name="name"/>
                     <field name="date"/>
                     <field name="customer"/>
                     <field name="vat"/>
@@ -600,7 +600,7 @@
 
                             </div>
 
-                            <field name="doc_no"/>
+                            <field name="name"/>
                             <field name="date"/>
                             <field name="customer"/>
                             <field name="vat"/>
