@@ -338,12 +338,14 @@
 
             </field>
         </record>
+
         <!-- View List Voucher-line -->
         <record model="ir.ui.view" id="real_estate.voucher-line_list_view">
             <field name="name">real.estate.list.view</field> <!-- :Todo Name is not unique -->
             <field name="model">voucher_line</field>
             <field name="arch" type="xml">
                 <list>
+                    <field name="voucher_id" />
                     <field name="acc_code"/>
                     <field name="bank_id" widget="many2one"/>
                     <field name="dimension"/>
@@ -352,6 +354,17 @@
                     <field name="debit"/>
                     <field name="credit"/>
                 </list>
+            </field>
+        </record>
+
+        <!-- View Search Voucher-line -->
+        <record model="ir.ui.view" id="real_estate.voucher-line_search_view">
+            <field name="name">real.estate.search.view</field>
+            <field name="model">voucher_line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="voucher_id" />
+                </search>
             </field>
         </record>
 
@@ -380,7 +393,6 @@
                         <group>
                             <div class="oe_button_box" name="button_box">
                             </div>
-                            <field name="name" readonly="1"/>
                             <field name="date"/>
                             <field name="branches"/>
                         </group>
